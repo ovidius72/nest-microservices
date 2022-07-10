@@ -1,18 +1,19 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Producer } from '@nestjs/microservices/external/kafka.interface';
 import { CreateServiceDto, UpdateServiceDto } from '@sekurest/common-dto';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class ServicesService {
   constructor(@Inject('KAFKA_PRODUCER') private kafkaProducer: Producer) {}
   create(createServiceDto: CreateServiceDto) {
-    const id = Math.floor(Math.random() * 100);
+    const id = randomUUID();
     this.sendKafkaEvent(`${id}`, {
       eventType: 'ServiceCreated',
       id,
       ...createServiceDto,
     });
-    return 'This action adds a new service';
+    return 'API: This action adds a new service';
   }
 
   findAll() {
@@ -48,9 +49,13 @@ export class ServicesService {
       `sending message: ${JSON.stringify(message, null, 2)}`,
       'ServicesService',
     );
-    this.kafkaProducer.send({
-      topic: 'services',
-      messages: [{ key, value: jsonValue }],
-    });
+    this.kafkaProducer
+      .send({
+        topic: 'api-services',
+        messages: [{ key, value: jsonValue }],
+      })
+      .then((ret) => {
+        console.log('*****: ret', ret);
+      });
   }
 }

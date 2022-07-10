@@ -10,13 +10,15 @@ import {
 import { CreateServiceDto, UpdateServiceDto } from '@sekurest/common-dto';
 import { ServicesService } from './services.service';
 
-@Controller('services')
+@Controller('api-services')
 export class ServicesController {
   constructor(private readonly servicesService: ServicesService) {}
 
   @Post()
   create(@Body() createServiceDto: CreateServiceDto) {
-    return this.servicesService.create(createServiceDto);
+    const res = this.servicesService.create(createServiceDto);
+    console.log('*****: res', res);
+    return res;
   }
 
   @Get()

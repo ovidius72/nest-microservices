@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { randomUUID } from 'crypto';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -12,7 +13,7 @@ async function bootstrap() {
           brokers: ['host.docker.internal:9094'],
         },
         consumer: {
-          groupId: `microservices-${Math.floor(Math.random() * 100)}`,
+          groupId: `microservices-${randomUUID()}`,
         },
       },
     },

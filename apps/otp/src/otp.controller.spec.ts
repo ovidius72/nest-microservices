@@ -16,7 +16,7 @@ describe('OtpController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(otpController.getHello()).toBe('Hello World!');
+      expect(otpController.getHello('jack')).toBe('Hello jack!');
     });
   });
 });
