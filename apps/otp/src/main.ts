@@ -4,7 +4,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { OtpModule } from './otp.module';
 
 const logger = new Logger('OTP');
-// this app has the request-response Pattern
+// this app implements the request-response Pattern
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     OtpModule,
