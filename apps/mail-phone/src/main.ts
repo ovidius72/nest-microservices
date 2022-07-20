@@ -3,6 +3,6 @@ import { MailPhoneModule } from './mail-phone.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(MailPhoneModule);
-  await app.listen(3000);
+  await app.listen(3002);
 }
 bootstrap();

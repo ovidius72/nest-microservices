@@ -14,9 +14,16 @@ describe('OtpController', () => {
     otpController = app.get<OtpController>(OtpController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(otpController.getHello('jack')).toBe('Hello jack!');
+  describe('send Email OTP: Should Succeed', () => {
+    it('should return a valid OTP', () => {
+      const respose = otpController.sendEmailOTP('jack@example.com');
+      expect(respose).toBeDefined();
+    });
+  });
+  describe('sende Email OTP: Should fail', () => {
+    it('should return a valid OTP', () => {
+      const respose = otpController.sendEmailOTP('');
+      expect(respose).toBeUndefined();
     });
   });
 });

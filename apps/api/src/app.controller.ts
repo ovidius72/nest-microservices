@@ -12,7 +12,7 @@ export class AppController {
     console.log('*****: name', name);
     console.log('*****: calling OTP_SERVICE');
     console.log('*****: optService', this.optService);
-    const res = await this.optService.send('getOTPName', name).toPromise();
+    const res = await this.optService.send('createOtp', name).toPromise();
     console.log('*****: res', res);
     return res;
   }

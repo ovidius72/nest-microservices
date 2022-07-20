@@ -6,9 +6,19 @@ import { OtpService } from './otp.service';
 export class OtpController {
   constructor(private readonly otpService: OtpService) {}
 
-  @MessagePattern('getOTPName')
-  getHello(name: string): string {
-    console.log('*****: OTP: controller reveived name', name);
-    return this.otpService.getHello(name);
+  @MessagePattern('sendPhoneOTP')
+  sendPhoneOTP(phoneNumber: string): string {
+    console.log('*****: CREATE OTP: controller received name', phoneNumber);
+    return this.otpService.create(phoneNumber);
+  }
+  @MessagePattern('sendEmailOTP')
+  sendEmailOTP(email: string): string {
+    console.log('*****: CREATE OTP: controller received name', email);
+    return this.otpService.create(email);
+  }
+  @MessagePattern('checkOtp')
+  checkOtp({ name, otp }: { name: string; otp: string }): boolean {
+    console.log('*****: CHECK OTP: controller received name', name, otp);
+    return this.otpService.check({ otp, name });
   }
 }

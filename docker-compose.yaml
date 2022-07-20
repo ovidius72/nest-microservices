@@ -9,6 +9,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:latest
+    user: root
     depends_on:
       - zookeeper
     ports:
@@ -48,3 +49,18 @@ services:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka:9092'
       CONTROL_CENTER_REPLICATION_FACTOR: 1
       PORT: 9021
+
+  redis-otp:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data
+
+volumes:
+  cache:
+    driver: local
