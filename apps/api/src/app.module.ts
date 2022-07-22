@@ -14,6 +14,14 @@ import { ServicesModule } from './services/services.module';
           port: 4000,
         },
       },
+      {
+        name: 'OTP_REDIS',
+        transport: Transport.REDIS,
+        options: {
+          host: 'localhost',
+          port: 6379,
+        },
+      },
     ]),
     ServicesModule,
   ],

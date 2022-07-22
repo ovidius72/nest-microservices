@@ -71,6 +71,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/mail-phone/tsconfig.app.json"
       }
+    },
+    "otp-redis": {
+      "type": "application",
+      "root": "apps/otp-redis",
+      "entryFile": "main",
+      "sourceRoot": "apps/otp-redis/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/otp-redis/tsconfig.app.json"
+      }
     }
   }
 }
