@@ -1,5 +1,11 @@
 import { Controller } from '@nestjs/common';
-import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import {
+  Ctx,
+  EventPattern,
+  MessagePattern,
+  Payload,
+  RedisContext,
+} from '@nestjs/microservices';
 import { OtpRedisService } from './otp-redis.service';
 
 @Controller()
@@ -7,7 +13,8 @@ export class OtpRedisController {
   constructor(private readonly otpRedisService: OtpRedisService) {}
 
   @MessagePattern({ cmd: 'otp-mail-create' })
-  async createForMail(mail: string) {
+  async createForMail(@Payload() mail: string, @Ctx() context: RedisContext) {
+    console.log('*****: context', context.getChannel());
     console.log('*****: mail', mail);
     console.log('****: OTP Maill create request in otp-redis service');
     console.log('****: OTP PHONE create request in otp-redis service');
