@@ -1,4 +1,5 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { randomUUID } from 'crypto';
 import { Producer } from 'kafkajs';
 
@@ -6,7 +7,10 @@ const otps = new Map<string, string>();
 
 @Injectable()
 export class OtpService {
-  constructor(@Inject('KAFKA_PRODUCER') private kafkaProducer: Producer) {}
+  constructor(
+    @Inject('KAFKA_PRODUCER') private kafkaProducer: Producer,
+    @Inject('OTP_REDIS') private otpRedis: ClientProxy,
+  ) {}
 
   create(name: string, expiry = 10): string | undefined {
     console.log('*****: expiry', expiry);

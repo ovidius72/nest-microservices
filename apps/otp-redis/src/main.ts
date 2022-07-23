@@ -8,11 +8,11 @@ async function bootstrap() {
     {
       transport: Transport.REDIS,
       options: {
-        host: 'localhost',
-        port: 6379,
+        url: 'redis://localhost:6379',
       },
     },
   );
+  console.log('Starting OTP_REDIS');
   await app.listen();
 }
 bootstrap();
